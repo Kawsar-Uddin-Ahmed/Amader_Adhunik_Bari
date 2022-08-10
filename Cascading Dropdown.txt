@@ -1,0 +1,39 @@
+https://www.youtube.com/watch?v=HRV2zEIMBqU
+
+
+<!---This is done for showing the page number like buttons--->
+<?php
+$per_page = 1;//per page can hold only two posts
+if(isset($_GET["page"]))
+{
+	$page = $_GET["page"];
+}
+else
+{
+	$page = 1;
+}
+$start = ($page-1)*$per_page
+?>
+
+	<div class="contentsection contemplete clear">
+			 <?php
+                    if (isset($_POST['submit'])) {
+                      $countryName = $fm->validation($_POST['search']);
+                      $sql = "SELECT * FROM tbl_upload WHERE zone_name LIKE '%".$countryName."%' and permission = '1' LIMIT $start, $per_page";
+                      
+
+///Bringing Data from database.//--\\\
+           if (isset($_POST['submit'])) {
+                      $countryName = $fm->validation($_POST['search']);
+                      $q = "SELECT * FROM tbl_upload WHERE zone_name LIKE '%".$countryName."%' and permission = '1'";
+               $r = $db->select($q);
+               $total_rows = mysqli_num_rows($r);
+               $total_pages = ceil($total_rows/$per_page);
+//--\\\
+              echo "<span class = 'pagination'><a href ='searchdetails.php?page =1'>".'First Page'."</a>";
+              for($i=1;$i<=$total_pages;$i++)
+              {
+	              echo "<a href ='searchdetails.php?page=".$i."'>".$i."</a>";
+              }
+              echo "<a href ='searchdetails.php?page=$total_pages'>".'Last Page'."</a></span>" ;
+               }

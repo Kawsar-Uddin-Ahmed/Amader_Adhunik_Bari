@@ -1,0 +1,49 @@
+ <div class="grid_10">
+            <div class="box round first grid">
+                <h2>Draft</h2>
+                 <div class="block">  
+                    <table class="data display datatable" id="example">
+          <thead>
+            <tr>
+              <th>Serial No.</th>
+              <th>Owner Email</th>
+              <th>Rentbill</th>
+              <th>Waterbill</th>
+              <th>Electricbill</th>
+              <th>Gasbill </th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+<?php
+$query = "SELECT * FROM tbl_payment ORDER BY pid ASC WHERE status = 0";
+$result = $db->select($query);
+
+if($result)
+{
+  $i = 0;
+  while($contact = $result->fetch_assoc())
+  {
+    $i++;
+
+?>
+            <tr class="odd gradeX">
+              <td><?php echo $i;?></td>
+              <td><?php echo $contact['email'];?></td>
+              <td><?php echo $contact['rentbill'];?></td>
+              <td><?php echo $contact['waterbill'];?></td>
+              <td><?php echo $contact['electricbill'];?></td>
+              <td><?php echo $contact['gasbill'];?></td>
+              <td><?php echo $contact['total'];?></td>
+              <td><a  href="Total.php?mdelid=<?php echo $contact['pid'];?>">Shift</a>
+            </tr>
+            <?php
+                         }
+}
+          ?>
+          </tbody>
+        </table>
+               </div>
+            </div>
+        </div>
